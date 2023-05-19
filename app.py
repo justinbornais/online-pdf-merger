@@ -1,7 +1,6 @@
 import os
 import csv
-from flask import Flask, flash, request, render_template, redirect, url_for, send_file
-from werkzeug.utils import secure_filename
+from flask import Flask, flash, request, render_template, send_file
 import requests
 from PyPDF2 import PdfMerger
 import random
