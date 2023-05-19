@@ -1,0 +1,71 @@
+<div class="">
+    <h1 style="text-align: center;">PDF File Merger</h1>
+    <h3 style="text-align: center;">Status: {{ data }}</h3>
+    <button onclick="addInput()">Add New File</button>
+    <button onclick="removeInput()">Remove Last File</button>
+    <form id="links" name="links" class="" action="data" method="post" enctype="multipart/form-data" onsubmit="submitFiles();">
+        <input type="text" name="filename" id="filename" value="" placeholder="Enter name of merged PDF file (optional)"><br />
+        <input type="text" name="link1" id="link1" value="" placeholder="Link to File 1"><br />
+        <input type="text" name="link2" id="link2" value="" placeholder="Link to File 2"><br />
+        <input type="text" name="link3" id="link3" value="" placeholder="Link to File 3"><br />
+        <input type="text" name="link4" id="link4" value="" placeholder="Link to File 4"><br />
+        <input type="submit" name="" id="submitButton" value="Submit">
+        <input type="hidden" name="numFiles" id="numFiles" value="">
+    </form>
+</div>
+
+<style>
+    body {
+        background-color:#faff66;
+    }
+    input[type="text"] {
+        width: 70vw;
+        height: 50px;
+        font-size: 20px;
+        margin: 10px 0px;
+        background-color:#faff66;
+    }
+    button {
+        background-color: #faff66;
+        font-size: 20px;
+        margin: 10px 5px;
+    }
+    input#submitButton {
+        background-color: #ffb366;
+        font-size: 25px;
+    }
+</style>
+
+<script>
+    var numFiles = 4;
+    function insertAfter(referenceNode, newNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
+
+    function addInput() {
+        var lastFile = document.getElementById(`link${numFiles}`);
+        numFiles++;
+        var newId = `link${numFiles}`;
+        const newFile = document.createElement("input");
+        newFile.id = newId;
+        newFile.name = newId;
+        newFile.type = "text";
+        newFile.value = "";
+        newFile.placeholder = `Link to File ${numFiles}`;
+        lastFile.parentElement.insertBefore(newFile, lastFile.nextSibling);
+        lastFile.parentElement.insertBefore(document.createElement("br"), lastFile.nextSibling);
+    }
+
+    function removeInput() {
+        if(numFiles <= 1) return;
+        var lastFile = document.getElementById(`link${numFiles}`);
+        lastFile.nextSibling.remove();
+        lastFile.remove();
+        numFiles--;
+    }
+
+    function submitFiles() {
+        document.getElementById("numFiles").value = numFiles;
+        return true;
+    }
+</script>
